@@ -18,7 +18,6 @@ class mainCircle {
 		this.qWaves = 1
 		this.wavesDistanceMed = this.r * 0.2
 		this.wavesDistanceMax = this.r * 0.3
-		this.qWaves = 2
 		this.wavesColor = 200
 		this.wavesWeight = 1
 		this.wavesVelMed = 3
@@ -36,10 +35,10 @@ class mainCircle {
 		//movement
 		this.x = this.centerX
 		this.y = this.centerY
-		this.movementX = this.r / 10
-		this.velX = 1
-		this.movementY = this.r / 10
-		this.velY = 1
+		this.movementX = this.r / 1
+		this.velX = 0.6
+		this.movementY = this.r / 7
+		this.velY = 0.6
 
 
 
@@ -78,6 +77,7 @@ class mainCircle {
 	//waves
 	drawWaves() {
 		this.ly.push()
+		this.ly.strokeWeight( this.wavesWeight )
 		this.wavesVel = map( this.hoverValue(), 0, 1, this.wavesVelMax, this.wavesVelMed )
 		this.wavesDistance = map( this.hoverValue(), 0, 1, this.wavesDistanceMax, this.wavesDistanceMed )
 		this.waves = []
@@ -92,8 +92,8 @@ class mainCircle {
 			}
 		}
 		this.ly.pop()
-
 	}
+
 	//mouse over
 	hoverValue() {
 		return map( dist( this.x, this.y, mouseX, mouseY ), this.r, this.hoverAct, 0, 1, true )

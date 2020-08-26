@@ -3,9 +3,11 @@ class environment {
 		this.ly = ly[ 'env' ]
 		this.buildingSize = 50
 		this.amount = round( width / this.buildingSize )
+		if ( this.amount > skImg.length ) { this.amount = skImg.length }
 		this.footerSize = 50
 		this.createSkyline()
 		this.createFooter()
+
 
 
 
@@ -18,21 +20,20 @@ class environment {
 	}
 	// draw skyline
 	createSkyline() {
-		this.buildings = new Set()
-		this.skyline = createGraphics( width, height )
-		while ( this.buildings.size != this.amount ) {
+		this.buildings = []
+		this.skyline = createGraphics( 1500, height )
+		while ( this.buildings.length != this.amount ) {
 			this.n = round( random( 29 ) )
-			if ( this.buildings.has( this.n ) ) {
+			if ( this.buildings.includes( this.n ) ) {
 				this.n = round( random( 29 ) )
-			} else { this.buildings.add( this.n ) }
+			} else { this.buildings.push( this.n ) }
 		}
-		// this.skyline.rotate( 180 )
-		for ( i = 0; i < this.buildings.size; i++ ) {
-
-			this.skyline.image( skImg[ i ], ( width / ( this.amount ) * i ), height - skImg[ i ].height )
+		for ( i = 0; i < this.buildings.length; i++ ) {
+			this.skyline.image( skImg[ this.buildings[ i ] ], ( this.buildingSize * i ), height - skImg[ this.buildings[ i ] ].height )
 		}
 
 	}
+
 	// draw footer
 	createFooter() {
 		this.footer = createGraphics( width, this.footerSize )
@@ -40,8 +41,10 @@ class environment {
 
 	}
 	draw() {
-		this.ly.image( this.footer, 0, height - this.footerSize )
-		this.ly.image( this.skyline, 0, -this.footerSize )
+		this.ly.clear()
+		this.ly.image( this.footer, 0, this.skyline.height - this.footerSize )
+		this.ly.image( this.skyline, 0, -this.footerSize + 2 )
+		image( this.ly, 0, 0 )
 
 	}
 }
