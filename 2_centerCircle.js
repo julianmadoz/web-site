@@ -7,10 +7,22 @@ class mainCircle {
 		this.ly = 0
 
 		//circle style
-		this.r = 80
-		this.stkWeight = 8
+		this.r = 100
+		this.stkWeight = 5
 		this.stkColor = 'black'
-		this.bg = ( 'white' )
+		this.bg = color( 255, 255, 255 )
+		this.hoverColor = color( 255, 200, 200 )
+		this.hoverAct = this.r * 2
+
+		//waves
+		this.qWaves = 1
+		this.wavesDistanceMed = this.r * 0.2
+		this.wavesDistanceMax = this.r * 0.3
+		this.qWaves = 2
+		this.wavesColor = 200
+		this.wavesWeight = 1
+		this.wavesVelMed = 3
+		this.wavesVelMax = 6
 
 		//text style
 		this.label = "Title"
@@ -24,9 +36,9 @@ class mainCircle {
 		//movement
 		this.x = this.centerX
 		this.y = this.centerY
-		this.movementX = width / 10
+		this.movementX = this.r / 10
 		this.velX = 1
-		this.movementY = height / 10
+		this.movementY = this.r / 10
 		this.velY = 1
 
 
@@ -43,7 +55,7 @@ class mainCircle {
 
 	//apply circle style
 	applyCircleStyle() {
-		this.ly.color( this.bg )
+		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hoverValue() ) )
 		this.ly.stroke( this.stkColor )
 		this.ly.strokeWeight( this.stkWeight )
 	}
@@ -63,15 +75,44 @@ class mainCircle {
 		this.x = this.centerX + this.movementX * sin( frameCount * this.velX )
 		this.y = this.centerY + this.movementY * sin( frameCount * this.velY )
 	}
+	//waves
+	drawWaves() {
+		this.ly.push()
+		this.wavesVel = map( this.hoverValue(), 0, 1, this.wavesVelMax, this.wavesVelMed )
+		this.wavesDistance = map( this.hoverValue(), 0, 1, this.wavesDistanceMax, this.wavesDistanceMed )
+		this.waves = []
+		for ( i = 0; i < this.qWaves; i++ ) {
+			this.ly.noFill()
+			this.dir = cos( ( 0.5 * i * 360 / this.qWaves ) + frameCount * this.wavesVel )
+			this.aplha = map( this.dir, 0, 1, 0, 100 )
+			if ( this.dir > 0 ) {
+				this.ly.stroke( this.wavesColor, this.aplha )
+				this.rTemp = this.r + this.wavesDistance * sin( ( 0.5 * i * 360 / this.qWaves + frameCount * this.wavesVel ) )
+				this.ly.circle( this.x, this.y, 2 * this.rTemp )
+			}
+		}
+		this.ly.pop()
+
+	}
+	//mouse over
+	hoverValue() {
+		return map( dist( this.x, this.y, mouseX, mouseY ), this.r, this.hoverAct, 0, 1, true )
+	}
 	//draw on selected graphic
 	draw() {
 		this.newPosition()
 
+
+		this.drawWaves()
+
 		this.applyCircleStyle()
+
+
 		this.ly.circle( this.x, this.y, 2 * this.r )
 
 		this.applyTextStyle()
 		this.ly.text( this.label, this.x, this.y )
+
 
 
 	}

@@ -1,13 +1,15 @@
-p5.disableFriendlyErrors = true
+p5.disableFriendlyErrors = false
 
 function preload() {
-	// loadMyFonts()
-	// loadSkylineImages( 29 )
+	loadMyFonts()
+	loadSkylineImages( 29 )
 }
 
 function setup() {
 	cv = createCanvas( windowWidth, windowHeight )
 	// pixelDensity( 1 )
+	cv.position( 0, 0 )
+	frameRate( 30 )
 	angleMode( DEGREES )
 	gr = createGraphics( width, height )
 	ly[ 'env' ] = createGraphics( width, height )
@@ -16,8 +18,8 @@ function setup() {
 	qwe[ 'name' ] = {}
 	qwe[ 'name' ][ '0' ] = new mainCircle( {
 		id: 'name',
-		centerX: width / 2 - 200,
-		centerY: height / 2,
+		centerX: width / 2,
+		centerY: height / 2 - 100,
 		velY: 2,
 		ly: gr,
 		label: 'Julian\nMadoz'
@@ -50,27 +52,18 @@ function setup() {
 }
 
 function draw() {
-	// clear()
-	// gr.clear()
-	// env.draw()
+	clear()
+	gr.clear()
+	env.draw()
 
-	// qwe[ 'name' ][ 'prueba1' ].draw()
-	// qwe[ 'name' ][ 'prueba2' ].draw()
-	// qwe[ 'name' ][ 'prueba3' ].draw()
-	// qwe[ 'name' ][ 0 ].draw()
-	// //
-	// image( gr, 0, 0 )
+	qwe[ 'name' ][ 'prueba1' ].draw()
+	qwe[ 'name' ][ 'prueba2' ].draw()
+	qwe[ 'name' ][ 'prueba3' ].draw()
+	qwe[ 'name' ][ 0 ].draw()
+	//
+	image( gr, 0, 0 )
 	env.draw()
 	image( ly[ 'env' ], 0, 0 )
-
-	// skyline = createGraphics( width, height )
-	// for ( i = 0; i < 4; i++ ) {
-	//
-	// 	image( skImg[ i ], 100, 100 )
-	// }
-
-	// image( skyline )
-
 
 
 }

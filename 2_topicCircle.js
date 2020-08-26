@@ -1,9 +1,8 @@
 class topicCircle {
 	constructor( options ) {
 		this.id = 0
-		this.d = width / 5
 		this.parent = 0
-		this.angle = 30
+		this.d = width / 7
 
 		this.ly = 0
 
@@ -26,13 +25,13 @@ class topicCircle {
 		//movement
 		this.vel = 4
 		this.vel2 = 0.4
-		this.osc = this.d / 20
+		this.osc = this.d / 30
 		this.trail = 5
 		this.sqs = []
-		this.angle =
+		this.angle = 360
 
-			//line
-			this.lineStroke = 8
+		//line
+		this.lineStroke = 8
 		this.lineColor = 'black'
 
 
