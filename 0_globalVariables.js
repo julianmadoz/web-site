@@ -6,3 +6,5 @@ let qwe = {} //Contains grops of Circles by name
 let ly = {} // Contains layers
 
 let fonts = {} // Contains fonts
+
+let skImg = [] // Contains skyline images

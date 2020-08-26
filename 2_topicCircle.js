@@ -26,7 +26,7 @@ class topicCircle {
 		//movement
 		this.vel = 4
 		this.vel2 = 0.4
-		this.osc = this.d / 4
+		this.osc = this.d / 20
 		this.trail = 5
 		this.sqs = []
 		this.angle =
@@ -39,7 +39,6 @@ class topicCircle {
 
 		this.setter( options );
 	}
-
 	// Function to Override defaults
 	setter( options ) {
 		for ( key in options ) {
