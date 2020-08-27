@@ -55,7 +55,6 @@ class topicCircle {
 		for ( key in options ) {
 			this[ key ] = options[ key ];
 		}
-
 	}
 
 	//apply circle style

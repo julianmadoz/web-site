@@ -17,6 +17,9 @@ class environment {
 		this.cloudsHeight1 = random( this.cloudsHeight[ 0 ], this.cloudsHeight[ 1 ] )
 		this.cloudsHeight2 = random( this.cloudsHeight[ 0 ], this.cloudsHeight[ 1 ] )
 		this.cloudsHeight3 = random( this.cloudsHeight[ 0 ], this.cloudsHeight[ 1 ] )
+		this.cloudsHeight4 = random( this.cloudsHeight[ 0 ], this.cloudsHeight[ 1 ] )
+		this.cloudsHeight5 = random( this.cloudsHeight[ 0 ], this.cloudsHeight[ 1 ] )
+		this.cloudsHeight6 = random( this.cloudsHeight[ 0 ], this.cloudsHeight[ 1 ] )
 		this.cloudsHeightMove = 10
 
 
@@ -50,9 +53,13 @@ class environment {
 		//clouds
 		imageMode( CENTER )
 		image( skClouds[ 0 ], width / 2 + 0.6 * width * sin( millis() / 1000 * this.cloudsVel + 0 ), this.cloudsHeight0 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
-		image( skClouds[ 1 ], width / 2 + -0.6 * width * sin( millis() / 1000 * this.cloudsVel + 120 ), this.cloudsHeight1 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
-		image( skClouds[ 2 ], width / 2 + 0.6 * width * sin( millis() / 1000 * this.cloudsVel + 180 ), this.cloudsHeight2 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
-		image( skClouds[ 3 ], width / 2 + -0.6 * width * sin( millis() / 1000 * this.cloudsVel + 90 ), this.cloudsHeight3 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
+		image( skClouds[ 1 ], width / 2 + -0.6 * width * sin( millis() / 1000 * this.cloudsVel + 60 ), this.cloudsHeight1 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
+		image( skClouds[ 2 ], width / 2 + 0.6 * width * sin( millis() / 1000 * this.cloudsVel + 120 ), this.cloudsHeight2 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
+		image( skClouds[ 3 ], width / 2 + -0.6 * width * sin( millis() / 1000 * this.cloudsVel + 180 ), this.cloudsHeight3 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
+		image( skClouds[ 1 ], width / 2 + -0.6 * width * sin( millis() / 1000 * this.cloudsVel + 240 ), this.cloudsHeight4 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
+		image( skClouds[ 3 ], width / 2 + -0.6 * width * sin( millis() / 1000 * this.cloudsVel + 360 ), this.cloudsHeight5 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
+		image( skClouds[ 2 ], width / 2 + -0.6 * width * sin( millis() / 1000 * this.cloudsVel + 90 ), this.cloudsHeight6 + this.cloudsHeightMove * sin( millis() / 200 * this.cloudsVel + 100 ) )
+
 		//skyline
 		image( skImg, width / 2, height - 140 / 2 - this.footerSize )
 		pop()

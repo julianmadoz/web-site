@@ -58,17 +58,17 @@ class mainCircle {
 
 	//apply circle style
 	applyCircleStyle() {
-		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hoverValue() ) )
-		this.ly.stroke( lerpColor( color( this.stkColorHover ), color( this.stkColor ), this.hoverValue() ) )
-		this.ly.strokeWeight( ( this.stkWeight + this.stkWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) ) * this.scale )
+		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hover ) )
+		this.ly.stroke( lerpColor( color( this.stkColorHover ), color( this.stkColor ), this.hover ) )
+		this.ly.strokeWeight( ( this.stkWeight + this.stkWeightPlus * map( this.hover, 0, 1, 1, 0 ) ) * this.scale )
 	}
 
 	//apple text style
 	applyTextStyle() {
 		this.ly.textFont( this.font )
 		this.ly.fill( this.tColor )
-		this.ly.stroke( lerpColor( color( this.tStrokeColorHover ), color( this.tStrokeColor ), this.hoverValue() ) )
-		this.ly.strokeWeight( ( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) ) * this.scale )
+		this.ly.stroke( lerpColor( color( this.tStrokeColorHover ), color( this.tStrokeColor ), this.hover ) )
+		this.ly.strokeWeight( ( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hover, 0, 1, 1, 0 ) ) * this.scale )
 		this.ly.textSize( this.tSize * this.scale )
 		this.ly.textAlign( this.tAlignV, this.tAlignH )
 
@@ -82,8 +82,8 @@ class mainCircle {
 	drawWaves() {
 		this.ly.push()
 		this.ly.strokeWeight( this.wavesWeight * this.scale )
-		this.wavesVel = map( this.hoverValue(), 0, 1, this.wavesVelMax, this.wavesVelMed )
-		this.wavesDistance = map( this.hoverValue(), 0, 1, this.wavesDistanceMax, this.wavesDistanceMed ) * this.scale
+		this.wavesVel = map( this.hover, 0, 1, this.wavesVelMax, this.wavesVelMed )
+		this.wavesDistance = map( this.hover, 0, 1, this.wavesDistanceMax, this.wavesDistanceMed ) * this.scale
 		this.waves = []
 		for ( i = 0; i < this.qWaves; i++ ) {
 			this.ly.noFill()
@@ -99,12 +99,13 @@ class mainCircle {
 	}
 
 	//mouse over
-	hoverValue() {
-		return map( dist( this.x, this.y, mouseX, mouseY ), this.r, this.hoverAct, 0, 1, true )
+	hoverCalc() {
+		this.hover = map( dist( this.x, this.y, mouseX, mouseY ), this.r, this.hoverAct, 0, 1, true )
 	}
 	//draw on selected graphic
 	draw() {
 		this.newPosition()
+		this.hoverCalc()
 
 
 		// this.drawWaves()
