@@ -7,33 +7,35 @@ function preload() {
 
 function setup() {
 	cv = createCanvas( windowWidth, windowHeight )
-	// pixelDensity( 1 )
+
+	// pixelDensity( 0.8 )
+	// noSmooth()
+
 	cv.position( 0, 0 )
 	frameRate( 30 )
 	angleMode( DEGREES )
-	gr = createGraphics( width, height )
 	ly[ 'env' ] = createGraphics( width, height )
 	env = new environment()
-	scr = new circleScreen()
-	scr.setMainCircle( {
+	scr[ 0 ] = new circleScreen( { id: 0 } )
+	scr[ 0 ].setMainCircle( {
 		id: 'name',
 		centerX: width / 2,
-		centerY: ( height - 200 ) / 2,
+		centerY: ( height - 100 ) / 2,
 		label: 'Julian\nMadoz'
 	} )
-	scr.setTopicCircle( {
+	scr[ 0 ].setTopicCircle( {
 		id: 0,
 		label: 'subtopic1'
 	} )
-	scr.setTopicCircle( {
+	scr[ 0 ].setTopicCircle( {
 		id: 2,
 		label: 'subads'
 	} )
-	scr.setTopicCircle( {
+	scr[ 0 ].setTopicCircle( {
 		id: 45,
 		label: 'suasdsfbads'
 	} )
-	scr.setTopicCircle( {
+	scr[ 0 ].setTopicCircle( {
 		id: 4,
 		label: 'suasdsfbads'
 	} )
@@ -44,5 +46,5 @@ function setup() {
 function draw() {
 	clear()
 	env.draw()
-	scr.draw()
+	scr[ 0 ].draw()
 }

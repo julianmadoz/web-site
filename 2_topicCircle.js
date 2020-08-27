@@ -4,8 +4,9 @@ class topicCircle {
 		this.id = 0
 		this.parent = 0
 		this.ly = 0
+		this.scr = 123
 
-		this.setter( options ); // reset basic props
+		this.setter( options ); // reset props
 		//circle style
 		this.r = 50
 		this.d = this.parent.r + width / 10
@@ -60,7 +61,8 @@ class topicCircle {
 
 	//apply circle style
 	applyCircleStyle() {
-		this.ly.color( this.bg )
+		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hoverValue() ) )
+		// this.ly.color( this.bg )
 		this.ly.stroke( this.stkColor )
 		this.ly.strokeWeight( this.stkWeight )
 	}
@@ -82,7 +84,8 @@ class topicCircle {
 	}
 	//line
 	drawLine() {
-		this.ly.stroke( this.lineColor )
+		this.ly.stroke( lerpColor( color( this.hoverColor ), color( this.lineColor ), this.hoverValue() ) )
+		// this.ly.stroke( this.lineColor )
 		this.ly.strokeWeight( this.lineStroke )
 		this.ly.line( this.x, this.y, this.parent.x, this.parent.y )
 	}
@@ -117,7 +120,6 @@ class topicCircle {
 	draw() {
 		this.newPosition()
 		this.drawLine()
-
 
 		this.applyCircleStyle()
 		this.ly.circle( this.x, this.y, 2 * this.r )

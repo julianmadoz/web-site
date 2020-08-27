@@ -27,6 +27,8 @@ class circleScreen {
 	}
 
 	setTopicCircle( options ) {
+		this.mC.draw()
+		options.scr = this.id
 		options.parent = this.mC
 		options.ly = this.ly
 		this.tC[ options.id ] = new topicCircle( options )
@@ -54,15 +56,15 @@ class circleScreen {
 		}
 	}
 	//set prop to objects
-	setProp( towho, prop, value ) {
+	setProp( towho, options ) {
 		if ( towho == 'mC' ) { // aplica solo al mC
-			this.mC[ prop ] = value
+			this.mC.setter( options )
 		} else if ( towho == 'tC' ) { // aplica a todos los tC
 			for ( let key in this.tC ) {
-				this.tC[ key ][ prop ] = value
+				this.tC[ key ].setter( options )
 			}
 		} else { // aplica a un tC en particular
-			this.tC[ towho ][ prop ] = value
+			this.tC[ towho ].setter( options )
 		}
 	}
 	//Draw the whole object in canvas - inside function

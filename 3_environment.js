@@ -38,6 +38,7 @@ class environment {
 	createFooter() {
 		this.footer = createGraphics( width, this.footerSize )
 		this.footer.background( 0 )
+		// this.footer.background( 51, 51, 51 )
 
 	}
 	draw() {

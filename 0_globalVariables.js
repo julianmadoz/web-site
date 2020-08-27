@@ -8,3 +8,5 @@ let ly = {} // Contains layers
 let fonts = {} // Contains fonts
 
 let skImg = [] // Contains skyline images
+
+let scr = {} // contains all screens 

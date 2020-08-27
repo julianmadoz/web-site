@@ -17,11 +17,11 @@ class mainCircle {
 		//waves
 		this.qWaves = 1
 		this.wavesDistanceMed = this.r * 0.2
-		this.wavesDistanceMax = this.r * 0.3
+		this.wavesDistanceMax = this.r * 0.5
 		this.wavesColor = 200
 		this.wavesWeight = 1
 		this.wavesVelMed = 3
-		this.wavesVelMax = 6
+		this.wavesVelMax = 20
 
 		//text style
 		this.label = "Title"
