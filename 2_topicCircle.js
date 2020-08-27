@@ -67,18 +67,18 @@ class topicCircle {
 
 	//apply circle style
 	applyCircleStyle() {
-		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hoverValue() ) )
+		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hover ) )
 		// this.ly.color( this.bg )
-		this.ly.stroke( lerpColor( color( this.stkColorHover ), color( this.stkColor ), this.hoverValue() ) )
-		this.ly.strokeWeight( this.stkWeight + this.stkWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
+		this.ly.stroke( lerpColor( color( this.stkColorHover ), color( this.stkColor ), this.hover ) )
+		this.ly.strokeWeight( this.stkWeight + this.stkWeightPlus * map( this.hover, 0, 1, 1, 0 ) )
 	}
 
 	//apple text style
 	applyTextStyle() {
 		this.ly.textFont( this.font )
 		this.ly.fill( this.tColor )
-		this.ly.stroke( lerpColor( color( this.tStrokeColorHover ), color( this.tStrokeColor ), this.hoverValue() ) )
-		this.ly.strokeWeight( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
+		this.ly.stroke( lerpColor( color( this.tStrokeColorHover ), color( this.tStrokeColor ), this.hover ) )
+		this.ly.strokeWeight( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hover, 0, 1, 1, 0 ) )
 		this.ly.textSize( this.tSize )
 		this.ly.textAlign( this.tAlignV, this.tAlignH )
 
@@ -90,24 +90,24 @@ class topicCircle {
 	}
 	//line
 	drawLine() {
-		// this.ly.stroke( lerpColor( color( this.hoverColor ), color( this.lineColor ), this.hoverValue() ) )
-		this.ly.stroke( lerpColor( color( this.lineColorHover ), color( this.lineColor ), this.hoverValue() ) )
-		this.ly.strokeWeight( this.lineStroke + this.lineStrokeHover * map( this.hoverValue(), 0, 1, 1, 0 ) )
+		// this.ly.stroke( lerpColor( color( this.hoverColor ), color( this.lineColor ), this.hover ) )
+		this.ly.stroke( lerpColor( color( this.lineColorHover ), color( this.lineColor ), this.hover ) )
+		this.ly.strokeWeight( this.lineStroke + this.lineStrokeHover * map( this.hover, 0, 1, 1, 0 ) )
 		this.ly.line( this.x, this.y, this.parent.x, this.parent.y )
 	}
 	//
 	// drawWaves() {
 	// 	this.ly.push()
 	// 	this.ly.strokeWeight( this.wavesWeight )
-	// 	this.wavesVel = map( this.hoverValue(), 0, 1, this.wavesVelMax, this.wavesVelMed )
-	// 	this.wavesDistance = map( this.hoverValue(), 0, 1, this.wavesDistanceMax, this.wavesDistanceMed )
+	// 	this.wavesVel = map( this.hover, 0, 1, this.wavesVelMax, this.wavesVelMed )
+	// 	this.wavesDistance = map( this.hover, 0, 1, this.wavesDistanceMax, this.wavesDistanceMed )
 	// 	this.waves = []
 	// 	for ( i = 0; i < this.qWaves; i++ ) {
 	// 		this.ly.noFill()
 	// 		this.dir = cos( ( 0.5 * i * 360 / this.qWaves ) + frameCount * this.wavesVel )
 	// 		this.aplha = map( this.dir, 0, 1, 0, 100 )
 	// 		if ( this.dir > 0 ) {
-	// 			this.ly.stroke( this.wavesColor, this.aplha * map( this.hoverValue(), 0, 1, 1, 0 ) )
+	// 			this.ly.stroke( this.wavesColor, this.aplha * map( this.hover, 0, 1, 1, 0 ) )
 	// 			this.rTemp = this.r + this.wavesDistance * sin( ( 0.5 * i * 360 / this.qWaves + frameCount * this.wavesVel ) )
 	// 			this.ly.circle( this.x, this.y, 2 * this.rTemp )
 	// 		}
@@ -116,14 +116,22 @@ class topicCircle {
 	// }
 
 	//mouse over
-	hoverValue() {
-		return map( dist( this.x, this.y, mouseX, mouseY ), this.r, this.hoverAct, 0, 1, true )
+	hoverCalc() {
+		this.hover = map( dist( this.x, this.y, mouseX, mouseY ), this.r, this.hoverAct, 0, 1, true )
+	}
+
+	clicked() {
+		if ( mouseIsPressed && this.hover == 0 ) {
+			print( this.id + 'tocadoooo' )
+		}
 	}
 
 
 
 	//draw on selected graphic
 	draw() {
+		this.hoverCalc()
+		this.clicked()
 		this.newPosition()
 		this.drawLine()
 

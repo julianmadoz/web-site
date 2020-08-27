@@ -7,8 +7,8 @@ class environment {
 		this.skyColor = [ 64, 191, 255 ]
 		this.skySteps = round( height * 0.015 )
 		this.sunX = width / 7
-		this.sunY = height / 10
-		this.sunSize = 100
+		this.sunY = height / 8
+		this.sunSize = 130
 		this.sunColor = color( 'yellow' )
 		this.cloudsVel = 4
 		this.cloudsHeight = [ height / 6, 4 * height / 6 ]
