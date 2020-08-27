@@ -63,6 +63,11 @@ class circleScreen {
 			for ( let key in this.tC ) {
 				this.tC[ key ].setter( options )
 			}
+		} else if ( towho == 'all' ) { // aplica a todos
+			this.mC.setter( options )
+			for ( let key in this.tC ) {
+				this.tC[ key ].setter( options )
+			}
 		} else { // aplica a un tC en particular
 			this.tC[ towho ].setter( options )
 		}

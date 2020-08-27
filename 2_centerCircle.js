@@ -3,7 +3,7 @@ class mainCircle {
 		this.id = 0
 		this.centerX = 0
 		this.centerY = 0
-
+		this.scale = 1
 		this.ly = 0
 
 		//circle style
@@ -60,7 +60,7 @@ class mainCircle {
 	applyCircleStyle() {
 		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hoverValue() ) )
 		this.ly.stroke( lerpColor( color( this.stkColorHover ), color( this.stkColor ), this.hoverValue() ) )
-		this.ly.strokeWeight( this.stkWeight + this.stkWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
+		this.ly.strokeWeight( ( this.stkWeight + this.stkWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) ) * this.scale )
 	}
 
 	//apple text style
@@ -68,22 +68,22 @@ class mainCircle {
 		this.ly.textFont( this.font )
 		this.ly.fill( this.tColor )
 		this.ly.stroke( lerpColor( color( this.tStrokeColorHover ), color( this.tStrokeColor ), this.hoverValue() ) )
-		this.ly.strokeWeight( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
-		this.ly.textSize( this.tSize )
+		this.ly.strokeWeight( ( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) ) * this.scale )
+		this.ly.textSize( this.tSize * this.scale )
 		this.ly.textAlign( this.tAlignV, this.tAlignH )
 
 	}
 	//calculate new position
 	newPosition() {
-		this.x = this.centerX + this.movementX * sin( frameCount * this.velX )
-		this.y = this.centerY + this.movementY * sin( frameCount * this.velY )
+		this.x = this.centerX + this.movementX * this.scale * sin( frameCount * this.velX )
+		this.y = this.centerY + this.movementY * this.scale * sin( frameCount * this.velY )
 	}
 	//waves
 	drawWaves() {
 		this.ly.push()
-		this.ly.strokeWeight( this.wavesWeight )
+		this.ly.strokeWeight( this.wavesWeight * this.scale )
 		this.wavesVel = map( this.hoverValue(), 0, 1, this.wavesVelMax, this.wavesVelMed )
-		this.wavesDistance = map( this.hoverValue(), 0, 1, this.wavesDistanceMax, this.wavesDistanceMed )
+		this.wavesDistance = map( this.hoverValue(), 0, 1, this.wavesDistanceMax, this.wavesDistanceMed ) * this.scale
 		this.waves = []
 		for ( i = 0; i < this.qWaves; i++ ) {
 			this.ly.noFill()
@@ -91,7 +91,7 @@ class mainCircle {
 			this.aplha = map( this.dir, 0, 1, 0, 100 )
 			if ( this.dir > 0 ) {
 				this.ly.stroke( this.wavesColor, this.aplha )
-				this.rTemp = this.r + this.wavesDistance * sin( ( 0.5 * i * 360 / this.qWaves + frameCount * this.wavesVel ) )
+				this.rTemp = this.r * this.scale + this.wavesDistance * sin( ( 0.5 * i * 360 / this.qWaves + frameCount * this.wavesVel ) )
 				this.ly.circle( this.x, this.y, 2 * this.rTemp )
 			}
 		}
@@ -112,7 +112,7 @@ class mainCircle {
 		this.applyCircleStyle()
 
 
-		this.ly.circle( this.x, this.y, 2 * this.r )
+		this.ly.circle( this.x, this.y, 2 * this.r * this.scale )
 
 		this.applyTextStyle()
 		this.ly.text( this.label, this.x, this.y )
