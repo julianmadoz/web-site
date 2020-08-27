@@ -13,7 +13,7 @@ function setup() {
 	angleMode( DEGREES )
 
 	env = new environment()
-	btn = new buttonMapper()
+	btn = new buttonMapper( { ly: cv } )
 	scr[ 0 ] = new circleScreen( { id: 0 } )
 	scr[ 0 ].setMainCircle( {
 		id: 'name',
