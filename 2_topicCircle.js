@@ -8,13 +8,15 @@ class topicCircle {
 
 		this.setter( options ); // reset props
 		//circle style
-		this.r = 50
+		this.r = 60
 		this.d = this.parent.r + width / 10
-		this.stkWeight = 4
+		this.stkWeight = 3
+		this.stkWeightPlus = 7
 		this.stkColor = 'black'
+		this.stkColorHover = color( 0, 200, 0 )
 		this.bg = ( 'white' )
-		this.hoverColor = color( 255, 200, 200 )
-		this.hoverAct = this.r * 2
+		this.hoverColor = color( 0, 255, 0 )
+		this.hoverAct = this.r * 2.5
 
 		// //waves
 		// this.qWaves = 1
@@ -30,7 +32,9 @@ class topicCircle {
 		this.font = fonts[ 'oldGame' ]
 		this.tColor = 'white'
 		this.tStrokeColor = 'black'
-		this.tStrokeWeight = 2
+		this.tStrokeColorHover = 'black'
+		this.tStrokeWeight = 3
+		this.tStrokeWeightPlus = 1
 		this.tSize = 12
 		this.tAlignV = CENTER
 		this.tAlignH = CENTER
@@ -44,8 +48,10 @@ class topicCircle {
 		this.angle = 360
 
 		//line
-		this.lineStroke = 8
+		this.lineStroke = 7
+		this.lineStrokeHover = 4
 		this.lineColor = 'black'
+		this.lineColorHover = color( 0, 200, 0 )
 
 
 
@@ -63,16 +69,16 @@ class topicCircle {
 	applyCircleStyle() {
 		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hoverValue() ) )
 		// this.ly.color( this.bg )
-		this.ly.stroke( this.stkColor )
-		this.ly.strokeWeight( this.stkWeight )
+		this.ly.stroke( lerpColor( color( this.stkColorHover ), color( this.stkColor ), this.hoverValue() ) )
+		this.ly.strokeWeight( this.stkWeight + this.stkWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
 	}
 
 	//apple text style
 	applyTextStyle() {
 		this.ly.textFont( this.font )
 		this.ly.fill( this.tColor )
-		this.ly.stroke( this.tStrokeColor )
-		this.ly.strokeWeight( this.tStrokeWeight )
+		this.ly.stroke( lerpColor( color( this.tStrokeColorHover ), color( this.tStrokeColor ), this.hoverValue() ) )
+		this.ly.strokeWeight( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
 		this.ly.textSize( this.tSize )
 		this.ly.textAlign( this.tAlignV, this.tAlignH )
 
@@ -84,9 +90,9 @@ class topicCircle {
 	}
 	//line
 	drawLine() {
-		this.ly.stroke( lerpColor( color( this.hoverColor ), color( this.lineColor ), this.hoverValue() ) )
-		// this.ly.stroke( this.lineColor )
-		this.ly.strokeWeight( this.lineStroke )
+		// this.ly.stroke( lerpColor( color( this.hoverColor ), color( this.lineColor ), this.hoverValue() ) )
+		this.ly.stroke( lerpColor( color( this.lineColorHover ), color( this.lineColor ), this.hoverValue() ) )
+		this.ly.strokeWeight( this.lineStroke + this.lineStrokeHover * map( this.hoverValue(), 0, 1, 1, 0 ) )
 		this.ly.line( this.x, this.y, this.parent.x, this.parent.y )
 	}
 	//

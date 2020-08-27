@@ -7,18 +7,20 @@ class mainCircle {
 		this.ly = 0
 
 		//circle style
-		this.r = 100
+		this.r = 90
 		this.stkWeight = 5
+		this.stkWeightPlus = 7
 		this.stkColor = 'black'
+		this.stkColorHover = color( 200, 0, 0 )
 		this.bg = color( 255, 255, 255 )
-		this.hoverColor = color( 255, 200, 200 )
+		this.hoverColor = color( 255, 0, 0 )
 		this.hoverAct = this.r * 2
 
 		//waves
 		this.qWaves = 1
 		this.wavesDistanceMed = this.r * 0.2
 		this.wavesDistanceMax = this.r * 0.5
-		this.wavesColor = 200
+		this.wavesColor = 100
 		this.wavesWeight = 1
 		this.wavesVelMed = 3
 		this.wavesVelMax = 20
@@ -28,15 +30,17 @@ class mainCircle {
 		this.font = fonts[ 'oldGame' ]
 		this.tColor = 'white'
 		this.tStrokeColor = 'black'
-		this.tStrokeWeight = 4
+		this.tStrokeColorHover = 'black'
+		this.tStrokeWeight = 7
+		this.tStrokeWeightPlus = 2
 		this.tSize = 30
 		this.tAlignV = CENTER
 		this.tAlignH = CENTER
 		//movement
 		this.x = this.centerX
 		this.y = this.centerY
-		this.movementX = this.r / 1
-		this.velX = 0.6
+		this.movementX = this.r * 3
+		this.velX = 0.4
 		this.movementY = this.r / 7
 		this.velY = 0.6
 
@@ -55,16 +59,16 @@ class mainCircle {
 	//apply circle style
 	applyCircleStyle() {
 		this.ly.fill( lerpColor( color( this.hoverColor ), color( this.bg ), this.hoverValue() ) )
-		this.ly.stroke( this.stkColor )
-		this.ly.strokeWeight( this.stkWeight )
+		this.ly.stroke( lerpColor( color( this.stkColorHover ), color( this.stkColor ), this.hoverValue() ) )
+		this.ly.strokeWeight( this.stkWeight + this.stkWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
 	}
 
 	//apple text style
 	applyTextStyle() {
 		this.ly.textFont( this.font )
 		this.ly.fill( this.tColor )
-		this.ly.stroke( this.tStrokeColor )
-		this.ly.strokeWeight( this.tStrokeWeight )
+		this.ly.stroke( lerpColor( color( this.tStrokeColorHover ), color( this.tStrokeColor ), this.hoverValue() ) )
+		this.ly.strokeWeight( this.tStrokeWeight + this.tStrokeWeightPlus * map( this.hoverValue(), 0, 1, 1, 0 ) )
 		this.ly.textSize( this.tSize )
 		this.ly.textAlign( this.tAlignV, this.tAlignH )
 
@@ -103,7 +107,7 @@ class mainCircle {
 		this.newPosition()
 
 
-		this.drawWaves()
+		// this.drawWaves()
 
 		this.applyCircleStyle()
 
