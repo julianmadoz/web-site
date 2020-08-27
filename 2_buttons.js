@@ -1,6 +1,5 @@
 class button {
 	constructor( options ) {
-		this.ly = 0
 		this.x = 0
 		this.y = 0
 
@@ -36,19 +35,19 @@ class button {
 	draw() {
 		push()
 		this.hover()
-		this.ly.strokeJoin( BEVEL )
-		this.ly.rectMode( CENTER )
-		this.ly.fill( this.rColor )
-		this.ly.stroke( this.stkCol )
-		this.ly.strokeWeight( this.rstkW )
-		this.ly.rect( this.x, this.y, this.w, this.h, this.round )
-		this.ly.textAlign( CENTER, CENTER )
-		this.ly.fill( this.tColor )
-		this.ly.stroke( this.tStkCol )
-		this.ly.strokeWeight( this.tStkW )
-		this.ly.textFont( this.font )
-		this.ly.textSize( this.tSize )
-		this.ly.text( this.label, this.x, this.y - 2 )
+		strokeJoin( BEVEL )
+		rectMode( CENTER )
+		fill( this.rColor )
+		stroke( this.stkCol )
+		strokeWeight( this.rstkW )
+		rect( this.x, this.y, this.w, this.h, this.round )
+		textAlign( CENTER, CENTER )
+		fill( this.tColor )
+		stroke( this.tStkCol )
+		strokeWeight( this.tStkW )
+		textFont( this.font )
+		textSize( this.tSize )
+		text( this.label, this.x, this.y - 2 )
 		pop()
 	}
 	hover() {
@@ -65,8 +64,6 @@ class button {
 
 class buttonMapper {
 	constructor( options ) {
-		ly[ 'btn' ] = createGraphics( width, height )
-		this.ly = ly[ 'btn' ]
 		this.buttons = {}
 		this.setButtons()
 	}
@@ -79,14 +76,11 @@ class buttonMapper {
 		for ( let key in this.buttons ) {
 			this.buttons[ key ].draw()
 		}
-
-		image( this.ly, 0, 0 )
 	}
 
 	setButtons() {
 		this.buttons = {
 			'aboutMe': new button( {
-				ly: this.ly,
 				label: 'Acerca de...',
 				x: 7 * width / 8,
 				y: height - env.footerSize / 2,
@@ -95,7 +89,6 @@ class buttonMapper {
 
 			} ),
 			'contacto': new button( {
-				ly: this.ly,
 				label: 'Contactame!',
 				x: width / 8,
 				y: height - env.footerSize / 2,
@@ -104,7 +97,6 @@ class buttonMapper {
 
 			} ),
 			'otraCosa': new button( {
-				ly: this.ly,
 				label: 'Otra cosa',
 				x: width / 2,
 				y: height - env.footerSize / 2,
